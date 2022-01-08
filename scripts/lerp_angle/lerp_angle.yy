@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Extensions",
-    "path": "folders/Extensions.yy",
+    "name": "Game Demos",
+    "path": "folders/Game Demos.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scr_open_second_window",
+  "name": "lerp_angle",
   "tags": [],
   "resourceType": "GMScript",
 }

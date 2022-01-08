@@ -8,13 +8,13 @@ switch (async_load[? "type"]) {
 		var reliable = buffer_peek(buffer, buffer_size - 1, buffer_u8);
 
 		if (enable_logs && cmd_id != net_cmd.ping && cmd_id != net_cmd.ack) {
-			__net_log("Command '" + string(commands[$ cmd_id]) + "' received from server with buffer " + __net_decode_buffer(buffer));
+			__net_log("🡄 Command '" + string(commands[$ cmd_id]) + "' received from server with buffer " + __net_decode_buffer(buffer));
 		}
 
 		// Ack the server message when requested
 		if (reliable == 2) {
 			if (enable_logs && enable_trace_logs) {
-				__net_log("Sending ack for the server message " + string(packet_id));
+				__net_log("🡆 Sending ack for the server message " + string(packet_id));
 			}
 			var ackBuffer = buffer_create(buffer_size, buffer_fixed, 1);
 			buffer_copy(buffer, 0, buffer_size, ackBuffer, 0);

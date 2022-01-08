@@ -4,7 +4,7 @@ if (!instance_exists(obj_net_manager) || obj_tris.turn != obj_net_manager.player
 // Select the box (place the symbol on it)
 selected = true;
 obj_tris.turn = !obj_tris.turn;
-net_send_array(msg.select, obj_tris.other_player.id, [xpos, ypos], 1);
+net_send_array(tris_msg.select, obj_tris.other_player.id, [xpos, ypos], 1);
 image_index = obj_tris.player_symbol + 2;
 symbol = obj_tris.player_symbol;
 

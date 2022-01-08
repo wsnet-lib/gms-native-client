@@ -1,12 +1,13 @@
 #macro NET_TIMER_SERVER_DISCONNECTION 10000000
-#macro NET_TIMER_PING 45
+#macro NET_TIMER_PING 60
 #macro NET_TIMER_RESEND_RELIABLE 120
-#macro NET_MAX_RELIABLE_TEMPTS 3
+#macro NET_MAX_RELIABLE_TEMPTS 5
 #macro NET_HEADER_SIZE 5
 
 enum net_evt {
 	connection,
 	connection_close,	
+	error,
 	lobby_data,
 	lobby_create,
 	lobby_join,
@@ -109,6 +110,7 @@ function net_connect(address, port, on_connect = undefined, socket_type = networ
 	instance_create_layer(0, 0, layer, obj_net_manager);
 	
 	with (obj_net_manager) {
+		server_uuid = undefined;
 		enable_logs = false; // Globally enable the generic logs
 		enable_trace_logs = false; // Enable additional logs for minor things like pings and acks
 		packet_id = 0; // Packet ID sequence

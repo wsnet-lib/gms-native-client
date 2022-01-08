@@ -33,7 +33,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Box",
-    "path": "folders/Game Demos/Tris/Box.yy",
+    "path": "folders/Game Demos/Tris/Components/Box.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_tris_box",

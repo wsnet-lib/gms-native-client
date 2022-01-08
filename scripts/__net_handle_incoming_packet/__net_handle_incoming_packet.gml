@@ -9,10 +9,11 @@
 function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	switch (cmd_id) {
 		case net_cmd.error:
-			var errId = buffer_peek(buffer, 1, buffer_u8);
+			error_id = buffer_peek(buffer, 1, buffer_u8);
+			events[net_evt.error](false);
 		
 			if (enable_logs) {
-				__net_log("Error '" + string(errors[$ errId]) + "' received");
+				__net_log("🡄 Error '" + string(errors[$ error_id]) + "' received");
 			}
 		break;
 	
@@ -28,7 +29,7 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 		case net_cmd.ack:
 			// Ack a reliable packet
 			if (enable_logs && enable_trace_logs) {
-				__net_log("Server sent the ack for the client message " + string(packet_id));
+				__net_log("🡄 Server sent the ack for the client message " + string(packet_id));
 			}
 		
 			var packet = rpackets[$ packet_id];
@@ -41,19 +42,25 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 			break;
 			
 		case net_cmd.lobby_data:
+			var current_server_uuid = server_uuid;
+			server_uuid = buffer_read(buffer, buffer_string);
+			
+			// Detect a server reconnection
+			var has_reconnected = current_server_uuid != undefined && server_uuid != current_server_uuid;
+		
 			var in_lobby = buffer_read(buffer, buffer_u8);
 			if (!in_lobby) {
-				events[net_evt.lobby_data](false);
+				events[net_evt.lobby_data](false, has_reconnected, false);
 				exit;
 			}
 			
 	        lobby_id = buffer_read(buffer, buffer_u32);
 	        admin_id = buffer_read(buffer, buffer_u8);
-	        player_id = buffer_read(buffer, buffer_u8);
+	        player_id = buffer_read(buffer, buffer_u8);			
 			var current_players_count = buffer_read(buffer, buffer_u8);
-			players_count = current_players_count + 1;
-							
-	        for (var i=0; i<current_players_count; i++) {
+			
+			players_count = current_players_count + 1;			
+			for (var i=0; i<current_players_count; i++) {
 				var listPlayerId = buffer_read(buffer, buffer_u8);
 				var listPlayerName = buffer_read(buffer, buffer_string);				
 				var player = {
@@ -68,7 +75,7 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 				}
 	        }
 				
-			events[net_evt.lobby_data](true);
+			events[net_evt.lobby_data](false, has_reconnected, true);
 	        break;
 				
 		case net_cmd.lobby_list:
@@ -170,7 +177,13 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 				
 		case net_cmd.lobby_player_left:
 	        var player_left_id = buffer_read(buffer, buffer_u8);
+			var current_admin_id = admin_id;
 	        admin_id = buffer_read(buffer, buffer_u8);
+			
+			// Side effect: if the player who left was an admin, trigger the related transfer event
+			if (current_admin_id != admin_id) {
+				events[net_evt.lobby_transfer](true, admin_id);
+			}
 	            
 			var left_player = __net_remove_player(player_left_id);
 			if (left_player != undefined) {

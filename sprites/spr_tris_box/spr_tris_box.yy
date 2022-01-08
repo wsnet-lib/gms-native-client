@@ -82,7 +82,7 @@
   "nineSlice": null,
   "parent": {
     "name": "Box",
-    "path": "folders/Game Demos/Tris/Box.yy",
+    "path": "folders/Game Demos/Tris/Components/Box.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_tris_box",

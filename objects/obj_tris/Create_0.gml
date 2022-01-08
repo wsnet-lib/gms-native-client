@@ -1,3 +1,5 @@
+window_set_size(room_width, room_height);
+alarm[0] = 1; // Center the window position
 randomize();
 player1_symbol = undefined;
 player2_symbol = undefined;
@@ -11,18 +13,24 @@ restarting = false; // If the game is restarting
 
 /** Server connection */
 net_connect("localhost", 8080);
+//net_connect("213.188.207.45", 8080);
 obj_net_manager.enable_logs = true;
-obj_net_manager.enable_trace_logs = false;
-//net_connect("muddy-hill-983.fly.dev", 53);
+obj_net_manager.enable_trace_logs = true;
 
 // Networking messages types
-enum msg {
+enum tris_msg {
 	start, // Game start
 	select, // Player has selected a box
 	finish, // The game is over
 }
 
-// If no lobbies are found, just create a lobby, otherwise note who is the opposite player
+// Quit the game on a server generic error or if the server has reconnected (pratically if the previous lobby is lost)
+net_event(net_evt.error, game_end);
+net_event(net_evt.lobby_data, function(success, has_reconnected) {
+	if (has_reconnected) game_end();
+});
+
+// If no lobbies are found, just create a lobby, otherwise note who is the opponent player
 net_event(net_evt.lobby_join, function(success)  {
 	if (success) {
 		other_player = obj_net_manager.players[0];
@@ -38,17 +46,12 @@ net_event(net_evt.lobby_create, function(success, lobby_id) {
 	turn = irandom(1);
 	player_symbol = player1_symbol;
 	is_admin = true;
-		
-	// Open a second window in order to quickly test the player 2
-	//if (os_type == os_windows) {
-	//	scr_open_second_window();
-	//}
 });
 
 // When the other player has joined, tell the initial choices and the confirm to start
 net_event(net_evt.player_join, function(success, player) {	
 	other_player = obj_net_manager.players[1];
-	net_send_array(msg.start, other_player.id, [player1_symbol ,player2_symbol, turn], 1);
+	net_send_array(tris_msg.start, other_player.id, [player1_symbol ,player2_symbol, turn], 1);
 	scr_tris_create_grid();
 });
 
@@ -59,11 +62,11 @@ net_event(net_evt.player_leave, function() {
 
 net_event(net_evt.lobby_leave, function() {
 	// The alarm ensures that the other client has restarted (just for debugging)
-	alarm[0] = 10;
+	alarm[1] = 10;
 });
 
 // The player2 will wait for this start message with the initial choices
-net_on(msg.start, function(sender_id, choices) {
+net_on(tris_msg.start, function(sender_id, choices) {
 	player1_symbol = choices[0];
 	player2_symbol = choices[1];
 	turn = choices[2];
@@ -73,7 +76,7 @@ net_on(msg.start, function(sender_id, choices) {
 });
 
 // Check the game over when the other player select a box
-net_on(msg.select, function(sender_id, pos) {
+net_on(tris_msg.select, function(sender_id, pos) {
 	var xpos = pos[0];
 	var ypos = pos[1];
 	turn = !turn;

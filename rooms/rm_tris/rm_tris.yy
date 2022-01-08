@@ -46,8 +46,8 @@
     "PhysicsWorldPixToMetres": 0.1,
   },
   "parent": {
-    "name": "Tris",
-    "path": "folders/Game Demos/Tris.yy",
+    "name": "Core",
+    "path": "folders/Game Demos/Tris/Core.yy",
   },
   "resourceVersion": "1.0",
   "name": "rm_tris",
