@@ -5,7 +5,7 @@
  * @param {Boolean} [reliable]
  */
 function __net_send(buffer, reliable=0) {
-	with (obj_net_manager) {
+	with (__obj_net_manager) {
 		var current_packet_id = packet_id++;
 	
 		// Packet Header

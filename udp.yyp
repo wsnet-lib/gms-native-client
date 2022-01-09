@@ -9,7 +9,7 @@
     {"id":{"name":"net_disconnect","path":"scripts/net_disconnect/net_disconnect.yy",},"order":1,},
     {"id":{"name":"net_connect","path":"scripts/net_connect/net_connect.yy",},"order":0,},
     {"id":{"name":"obj_tris","path":"objects/obj_tris/obj_tris.yy",},"order":0,},
-    {"id":{"name":"obj_net_manager","path":"objects/obj_net_manager/obj_net_manager.yy",},"order":0,},
+    {"id":{"name":"__obj_net_manager","path":"objects/__obj_net_manager/__obj_net_manager.yy",},"order":0,},
     {"id":{"name":"__net_send","path":"scripts/__net_send/__net_send.yy",},"order":1,},
     {"id":{"name":"net_lobby_password","path":"scripts/net_lobby_password/net_lobby_password.yy",},"order":7,},
     {"id":{"name":"net_lobby_ban","path":"scripts/net_lobby_ban/net_lobby_ban.yy",},"order":2,},

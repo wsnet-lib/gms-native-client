@@ -23,7 +23,7 @@ function net_disconnect() {
 	buffer_write(buffer, buffer_u8, net_cmd.disconnect);
 	__net_send(buffer);
 	
-	with (obj_net_manager) {
+	with (__obj_net_manager) {
 		network_destroy(socket);
 		instance_destroy();
 	}

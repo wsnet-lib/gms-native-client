@@ -5,5 +5,5 @@
  * @param {Function} callback
  */
 function net_on(msgId, callback) {
-	obj_net_manager.game_message_callbacks[$ msgId] = callback;
+	__obj_net_manager.game_message_callbacks[$ msgId] = callback;
 }

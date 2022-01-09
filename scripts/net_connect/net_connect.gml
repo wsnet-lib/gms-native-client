@@ -27,7 +27,7 @@ enum net_evt {
 }
 
 enum net_cmd {
-    error,
+  error,
 	game_message,
 	lobby_list,
 	lobby_create,
@@ -56,40 +56,40 @@ enum net_cmd {
 }
 
 enum net_sort {
-    no_sort,
-    ascending,
-    descending
+  no_sort,
+  ascending,
+  descending
 }
 
 enum net_type {
-    raw,
-    byte,
-    byte_array,
-    number,
-    number_array,
-    text,
-    text_array,
-    array,
-    list,
-    map,
+  raw,
+  byte,
+  byte_array,
+  number,
+  number_array,
+  text,
+  text_array,
+  array,
+  list,
+  map,
 	integer32,
-    integer64,
+  integer64,
 	struct
 }
 
 enum net_error {
-    no_error,
-    command_not_found,
-    player_not_found,
-    lobby_not_found,
-    unauthorized,
-    wrong_password,
-    max_lobby_players,
-    input_validation_failed,
-    already_in_lobby,
-    server_error,
-    callback_not_found,
-    incorrect_type,
+  no_error,
+  command_not_found,
+  player_not_found,
+  lobby_not_found,
+  unauthorized,
+  wrong_password,
+  max_lobby_players,
+  input_validation_failed,
+  already_in_lobby,
+  server_error,
+  callback_not_found,
+  incorrect_type,
 	reliable_packet_not_found
 }
 
@@ -107,9 +107,9 @@ enum net_error {
  * @param {String} [layer] The layer which the net manager instance will be created
  */
 function net_connect(address, port, on_connect = undefined, socket_type = network_socket_udp, layer = "Instances") {
-	instance_create_layer(0, 0, layer, obj_net_manager);
+	instance_create_layer(0, 0, layer, __obj_net_manager);
 	
-	with (obj_net_manager) {
+	with (__obj_net_manager) {
 		global.net_connected = true;
 		server_uuid = undefined;
 		global.net_enable_logs = false; // Globally enable the generic logs

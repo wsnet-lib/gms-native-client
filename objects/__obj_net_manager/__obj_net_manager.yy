@@ -30,7 +30,7 @@
     "path": "folders/Networking/Internal.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_net_manager",
+  "name": "__obj_net_manager",
   "tags": [],
   "resourceType": "GMObject",
 }

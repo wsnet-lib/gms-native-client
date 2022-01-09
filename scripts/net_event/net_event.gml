@@ -5,5 +5,5 @@
  * @param {Function} callback
  */
 function net_event(eventId, callback) {
-	obj_net_manager.events[eventId] = callback;
+	__obj_net_manager.events[eventId] = callback;
 }

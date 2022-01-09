@@ -58,7 +58,6 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	    global.net_admin_id = buffer_read(buffer, buffer_u8);
 	    global.net_player_id = buffer_read(buffer, buffer_u8);			
 			var current_players_count = buffer_read(buffer, buffer_u8);
-			
 			global.net_players_count = current_players_count + 1;		
 			
 			for (var i=0; i<current_players_count; i++) {
@@ -201,12 +200,12 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 			
 	    global.net_admin_id = buffer_read(buffer, buffer_u8); 
 	    events[net_evt.lobby_transfer](true, global.net_admin_id);
-	    break;
+	  break;
 				
 		case net_cmd.lobby_transfer_changed:
 	    global.net_admin_id = buffer_read(buffer, buffer_u8); 
 	    events[net_evt.lobby_transfer](true, global.net_admin_id);
-	    break;
+	  break;
 				
 		case net_cmd.lobby_allow_join:
 			global.net_error_id = buffer_read(buffer, buffer_u8);
@@ -217,12 +216,12 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 			
 	    var allow_join = buffer_read(buffer, buffer_u8);
 	    events[net_evt.lobby_allow_join](true, allow_join);
-	    break;
+	  break;
 				
-			case net_cmd.lobby_allow_join_changed:
-				var allow_join = buffer_read(buffer, buffer_u8);
-	      events[net_evt.lobby_allow_join](true, allow_join);
-	    break;
+		case net_cmd.lobby_allow_join_changed:
+			var allow_join = buffer_read(buffer, buffer_u8);
+	    events[net_evt.lobby_allow_join](true, allow_join);
+	  break;
 				
 		case net_cmd.lobby_max_players:
 	    global.net_error_id = buffer_read(buffer, buffer_u8);
@@ -358,6 +357,6 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	    }
 			
 			events[net_evt.lobby_get_banned](true, arr);
-	    break;
+	  break;
 	}
 }
