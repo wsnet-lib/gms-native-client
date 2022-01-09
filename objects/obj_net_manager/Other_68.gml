@@ -7,13 +7,13 @@ switch (async_load[? "type"]) {
 		var packet_id = buffer_peek(buffer, buffer_size - 5, buffer_u32);
 		var reliable = buffer_peek(buffer, buffer_size - 1, buffer_u8);
 
-		if (enable_logs && cmd_id != net_cmd.ping && cmd_id != net_cmd.ack) {
+		if (global.net_enable_logs && cmd_id != net_cmd.ping && cmd_id != net_cmd.ack) {
 			__net_log("🡄 Command '" + string(commands[$ cmd_id]) + "' received from server with buffer " + __net_decode_buffer(buffer));
 		}
 
 		// Ack the server message when requested
 		if (reliable == 2) {
-			if (enable_logs && enable_trace_logs) {
+			if (global.net_enable_logs && global.net_enable_trace_logs) {
 				__net_log("🡆 Sending ack for the server message " + string(packet_id));
 			}
 			var ackBuffer = buffer_create(buffer_size, buffer_fixed, 1);
@@ -26,15 +26,15 @@ switch (async_load[? "type"]) {
 
 		// Handle the packet
 		__net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size);		
-		break;
+	break;
 	
 	// For TCP/WS protocols
 	case network_type_connect:
 		events[net_evt.connection]();
-		break;
+	break;
 	
 	case network_type_disconnect:
 		net_disconnect();
 		events[net_evt.connection_close]();
-		break;
+	break;
 }

@@ -110,18 +110,19 @@ function net_connect(address, port, on_connect = undefined, socket_type = networ
 	instance_create_layer(0, 0, layer, obj_net_manager);
 	
 	with (obj_net_manager) {
+		global.net_connected = true;
 		server_uuid = undefined;
-		enable_logs = false; // Globally enable the generic logs
-		enable_trace_logs = false; // Enable additional logs for minor things like pings and acks
+		global.net_enable_logs = false; // Globally enable the generic logs
+		global.net_enable_trace_logs = false; // Enable additional logs for minor things like pings and acks
 		packet_id = 0; // Packet ID sequence
-		__last_server_pong = get_timer();
-		__ping_timer =  __last_server_pong; // Internal usage. Used to precisely calculate the ping
-		ping_ms = 0; // Ping in ms
+		last_server_pong = get_timer();
+		ping_timer = last_server_pong; // Internal usage. Used to precisely calculate the ping
+		global.net_ping_ms = 0; // Ping in ms
 		
 		rpackets = {}; // Map of reliable messages
 		socket = network_create_socket(socket_type); // Socket
 		events = array_create(net_evt.events_count, function() {}); // Events callbacks
-		error_id = undefined;
+		global.net_error_id = undefined;
 		game_message_callbacks = {}; // Game messages callbacks
 		
 		// Connection callback
@@ -130,14 +131,14 @@ function net_connect(address, port, on_connect = undefined, socket_type = networ
 		}
 		
 		// Lobby state
-		lobby_id = undefined;
-		players_count = 0;
-		player_id = undefined;
-		player_name = undefined;		
-		admin_id = undefined;
-		players = [];
-		players_map = {};
-		lobbies = [];
+		global.net_lobby_id = undefined;
+		global.net_players_count = 0;
+		global.net_player_id = undefined;
+		global.net_player_name = undefined;		
+		global.net_admin_id = undefined;
+		global.net_players = [];
+		global.net_players_map = {};
+		global.net_lobbies = [];
 	
 		// Command names struct (for debugging only)
 		commands = {};

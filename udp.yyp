@@ -71,9 +71,9 @@
     "children": [],
   },
   "RoomOrderNodes": [
-    {"roomId":{"name":"rm_spacewar","path":"rooms/rm_spacewar/rm_spacewar.yy",},},
     {"roomId":{"name":"rm_demoselector","path":"rooms/rm_demoselector/rm_demoselector.yy",},},
     {"roomId":{"name":"rm_tris","path":"rooms/rm_tris/rm_tris.yy",},},
+    {"roomId":{"name":"rm_spacewar","path":"rooms/rm_spacewar/rm_spacewar.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Networking.yy","order":0,"resourceVersion":"1.0","name":"Networking","tags":[],"resourceType":"GMFolder",},
@@ -89,7 +89,6 @@
     {"folderPath":"folders/Game Demos/Demo Selector.yy","order":0,"resourceVersion":"1.0","name":"Demo Selector","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Game Demos/Space War/Components/Player.yy","order":1,"resourceVersion":"1.0","name":"Player","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Game Demos/Space War/Core.yy","order":0,"resourceVersion":"1.0","name":"Core","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Game Demos/Space War/Helpers.yy","order":1,"resourceVersion":"1.0","name":"Helpers","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Game Demos/Space War/Components.yy","order":2,"resourceVersion":"1.0","name":"Components","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Game Demos/Tris/Core.yy","order":0,"resourceVersion":"1.0","name":"Core","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Game Demos/Tris/Scripts.yy","order":1,"resourceVersion":"1.0","name":"Scripts","tags":[],"resourceType":"GMFolder",},

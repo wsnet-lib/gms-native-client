@@ -1,5 +1,5 @@
 // Check if you can select this box
-if (!instance_exists(obj_net_manager) || obj_tris.turn != obj_net_manager.player_id || obj_tris.winner != -1 || selected) exit;
+if (!global.net_connected || obj_tris.turn != global.net_player_id || obj_tris.winner != -1 || selected) exit;
 
 // Select the box (place the symbol on it)
 selected = true;

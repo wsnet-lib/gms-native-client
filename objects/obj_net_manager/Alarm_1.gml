@@ -20,7 +20,7 @@ for (var i=0; i<packets_count; i++) {
 	buffer_delete(packet.buffer);
 }
 
-if (debug_mode && enable_logs && num_resent_rpackets) {
+if (global.net_enable_logs && num_resent_rpackets) {
 	__net_log("🡆 Resent " + string(num_resent_rpackets) + " out of " + string(packets_count) + " reliable packets");
 }
 

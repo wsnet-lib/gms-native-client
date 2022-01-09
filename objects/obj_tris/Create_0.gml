@@ -13,9 +13,8 @@ restarting = false; // If the game is restarting
 
 /** Server connection */
 net_connect("localhost", 8080);
-//net_connect("213.188.207.45", 8080);
-obj_net_manager.enable_logs = true;
-obj_net_manager.enable_trace_logs = true;
+global.net_enable_logs = true;
+global.net_enable_trace_logs = true;
 
 // Networking messages types
 enum tris_msg {
@@ -33,7 +32,7 @@ net_event(net_evt.lobby_data, function(success, has_reconnected) {
 // If no lobbies are found, just create a lobby, otherwise note who is the opponent player
 net_event(net_evt.lobby_join, function(success)  {
 	if (success) {
-		other_player = obj_net_manager.players[0];
+		other_player = global.net_players[0];
 	} else {
 		net_lobby_create("Lobby", 2, "P1");
 	}
@@ -50,7 +49,7 @@ net_event(net_evt.lobby_create, function(success, lobby_id) {
 
 // When the other player has joined, tell the initial choices and the confirm to start
 net_event(net_evt.player_join, function(success, player) {	
-	other_player = obj_net_manager.players[1];
+	other_player = global.net_players[1];
 	net_send_array(tris_msg.start, other_player.id, [player1_symbol ,player2_symbol, turn], 1);
 	scr_tris_create_grid();
 });

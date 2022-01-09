@@ -13,7 +13,7 @@ function __net_send(buffer, reliable=0) {
 		buffer_write(buffer, buffer_u8, reliable);
 		
 		// Logs
-		if (enable_logs) {
+		if (global.net_enable_logs) {
 			var cmd_id = buffer_peek(buffer, 0, buffer_u8);
 			if (cmd_id != net_cmd.ping) {
 				__net_log("🡆 Sending message '" + commands[$ cmd_id] + "' with buffer " + __net_decode_buffer(buffer));	

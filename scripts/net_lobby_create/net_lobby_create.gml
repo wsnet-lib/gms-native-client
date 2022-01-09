@@ -3,12 +3,12 @@
  *
  * @note This message is sent as reliable.
  *
- * @param {String} lobby_name Lobby name
- * @param {Integer<u8>} max_players Max count of players allowed in the lobby
- * @param {String} username Username of the lobby admin
+ * @param {String} [lobby_name] Lobby name
+ * @param {Integer<u8>} [max_players] Max count of players allowed in the lobby
+ * @param {String} [username] Username of the lobby admin
  * @param {String} [password] Optional lobby password (empty string or undefined = public lobby)
  */
-function net_lobby_create(lobby_name, max_players, username, password = "") {
+function net_lobby_create(lobby_name="", max_players=16, username = "", password = "") {
 	if (password == undefined) password = "";
 	
 	var buf = buffer_create(5 + string_byte_length(lobby_name) + string_byte_length(username) +

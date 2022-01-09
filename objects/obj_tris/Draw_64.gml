@@ -1,12 +1,12 @@
 draw_set_color(c_white); draw_set_halign(fa_left); draw_set_valign(fa_top);
 
-if (!instance_exists(obj_net_manager)) {
+if (!global.net_connected) {
 	draw_text(10, 30, "Error: connection lost");
 	exit;
 }
 
 draw_set_halign(fa_right);
-draw_text(room_width-10, 10, "Ping: " + string(obj_net_manager.ping_ms) + "ms");
+draw_text(room_width-10, 10, "Ping: " + string(global.net_ping_ms) + "ms");
 draw_set_halign(fa_left);
 
 if (other_player == undefined) {
@@ -25,7 +25,7 @@ draw_set_halign(fa_left); draw_set_valign(fa_top);
 draw_text(10, 10, "Player: " + (!player_symbol ? "X" : "O"));
 
 if (winner == -1) {
-	if (turn == obj_net_manager.player_id) {
+	if (turn == global.net_player_id) {
 		draw_text(10, 30, "It's your turn");
 	} else {
 		draw_text(10, 30, "It's the opponent turn");

@@ -6,8 +6,8 @@ is_admin = undefined; // If the current player is an admin
 
 /** Server connection */
 net_connect("localhost", 8080);
-//obj_net_manager.enable_logs = true;
-//obj_net_manager.enable_trace_logs = true;
+global.net_enable_logs = true;
+global.net_enable_trace_logs = true;
 
 // Networking messages types
 enum spacewar_msg {
@@ -22,10 +22,10 @@ net_event(net_evt.lobby_data, function(success, has_reconnected) {
 
 function createPlayers() {
 	var player = instance_create_layer(-999, -999, "Instances", obj_spacewar_player);
-	player.playerId = obj_net_manager.player_id;
+	player.playerId = global.net_player_id;
 	
-	for (var i=0, len=array_length(obj_net_manager.players); i<len; i++) {
-		var netEnemy = obj_net_manager.players[i];
+	for (var i=0, len=array_length(global.net_players); i<len; i++) {
+		var netEnemy = global.net_players[i];
 		var enemy = instance_create_layer(-999, -999, "Instances", obj_spacewar_enemy);
 		enemy.playerId = netEnemy.id;
 	}
@@ -37,7 +37,7 @@ function createPlayers() {
 net_event(net_evt.lobby_join, function(success)  {	
 	is_admin = !success;
 	if (!success) {
-		net_lobby_create("", 32, "");
+		net_lobby_create();
 	} else {
 		// Create the player object (on lobby join)
 		createPlayers();
@@ -90,4 +90,4 @@ net_on(spacewar_msg.player_pos, function(sender_id, pos) {
 	}
 });
 
-net_lobby_join_auto("");
+net_lobby_join_auto();
