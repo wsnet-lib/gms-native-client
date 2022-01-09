@@ -57,10 +57,9 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	    global.net_lobby_id = buffer_read(buffer, buffer_u32);
 	    global.net_admin_id = buffer_read(buffer, buffer_u8);
 	    global.net_player_id = buffer_read(buffer, buffer_u8);			
-			var current_players_count = buffer_read(buffer, buffer_u8);
-			global.net_players_count = current_players_count + 1;		
+			global.net_players_count = buffer_read(buffer, buffer_u8);			
 			
-			for (var i=0; i<current_players_count; i++) {
+			for (var i=0; i<global.net_players_count; i++) {
 				var listPlayerId = buffer_read(buffer, buffer_u8);
 				var listPlayerName = buffer_read(buffer, buffer_string);				
 				var player = {
@@ -111,7 +110,7 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	    global.net_player_id = 0;
 			global.net_player_name = buffer_read(buffer, buffer_string);
 	    global.net_admin_id = 0;
-			players_count = 1;
+			global.net_players_count = 1;
             
 	    var player = {
 				id: 0,
@@ -133,9 +132,9 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	    global.net_lobby_id = buffer_read(buffer, buffer_u32);
 	    global.net_admin_id = buffer_read(buffer, buffer_u8);
 	    global.net_player_id = buffer_read(buffer, buffer_u8);
-			var players_count = buffer_read(buffer, buffer_u8);
+			global.net_players_count = buffer_read(buffer, buffer_u8);
 				
-	    for (var i=0; i<players_count; i++) {
+	    for (var i=0; i<global.net_players_count; i++) {
 				var listPlayerId = buffer_read(buffer, buffer_u8);
 				var listPlayerName = buffer_read(buffer, buffer_string);				
 				var player = {
@@ -172,6 +171,7 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	    global.net_player_name = undefined;
 			global.net_players = [];
 			global.net_players_map = {};
+			global.net_players_count = 0;
 	    events[net_evt.lobby_leave](buffer_read(buffer, buffer_u8));
 	  break;
 				
