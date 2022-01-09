@@ -4,11 +4,6 @@ randomize();
 tickrate = room_speed / 30; // Server updates tickrate
 is_admin = undefined; // If the current player is an admin
 
-/** Server connection */
-net_connect("localhost", 8080);
-global.net_enable_logs = true;
-global.net_enable_trace_logs = true;
-
 // Networking messages types
 enum spacewar_msg {
 	player_pos, // Update a player position

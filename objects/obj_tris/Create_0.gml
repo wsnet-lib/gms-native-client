@@ -11,11 +11,6 @@ winner = -1; // If the game has ended
 grid = array_create(3, array_create(3)); // Create the boxes grid
 restarting = false; // If the game is restarting
 
-/** Server connection */
-net_connect("localhost", 8080);
-global.net_enable_logs = true;
-global.net_enable_trace_logs = true;
-
 // Networking messages types
 enum tris_msg {
 	start, // Game start
