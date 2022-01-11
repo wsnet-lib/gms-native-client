@@ -1,7 +1,7 @@
 window_set_size(960, 540);
 alarm[0] = 1; // Center the window position
 randomize();
-audio_play_sound(snd_spacewar_bg, 0, true);
+audio_play_sound(snd_spacewar_bg, 10, true);
 tickrate = room_speed / 30; // Server updates tickrate
 is_admin = undefined; // If the current player is an admin
 played_audio_shots = []; // Currently played audio shots
@@ -64,7 +64,7 @@ net_event(net_evt.lobby_join, function(success)  {
 
 // Create the player object (on lobby creation)
 net_event(net_evt.lobby_create, function(success) {
-	createPlayers()
+	createPlayers();
 });
 
 // When a new player joins, add it as enemy
@@ -89,6 +89,7 @@ net_event(net_evt.player_leave, function(success, player) {
 // If this is the first update, directly set the final variables and not the target variables
 net_on(spacewar_msg.player_pos, function(sender_id, pos) {
 	var enemyMap = global.net_players_map[$ sender_id];
+	if (enemyMap == undefined) return;
 	with (enemyMap.obj) {
 		if (!firstUpdateReceived) {
 			x = pos[0];			
@@ -112,7 +113,8 @@ net_on(spacewar_msg.player_pos, function(sender_id, pos) {
 
 // Set the players state
 net_on(spacewar_msg.player_state, function(sender_id, state) {
-	var enemyMap = global.net_players_map[$ state.id];
+	var enemyMap = global.net_players_map[$ state.id];	
+	if (enemyMap == undefined) return;
 	with (enemyMap.obj) {
 		image_index = state.index;
 		hp = state.hp;
@@ -133,6 +135,7 @@ net_on(spacewar_msg.player_state, function(sender_id, state) {
 // Create an enemy shot
 net_on(spacewar_msg.shot, function(sender_id, pos) {
 	var enemyMap = global.net_players_map[$ sender_id];
+	if (enemyMap == undefined) return;
 	with (enemyMap.obj) {
 		shotX = pos[0];
 		shotY = pos[1];

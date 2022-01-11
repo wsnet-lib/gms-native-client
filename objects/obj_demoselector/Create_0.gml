@@ -6,6 +6,4 @@ brk = chr(13) + chr(10);
 /** Server connection */
 net_connect("localhost", 8080);
 global.net_enable_logs = true;
-//global.net_enable_trace_logs = true;
-
-room_goto(rm_spacewar)
+global.net_enable_trace_logs = true;

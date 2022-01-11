@@ -4,3 +4,5 @@ shotX = undefined;
 shotY = undefined;
 shotTargetX = undefined;
 shotTargetY = undefined;
+hit_animation = false;
+hit_animation_direction = 1;

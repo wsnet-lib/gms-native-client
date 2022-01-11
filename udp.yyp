@@ -26,6 +26,7 @@
     {"id":{"name":"obj_spacewar_enemy","path":"objects/obj_spacewar_enemy/obj_spacewar_enemy.yy",},"order":3,},
     {"id":{"name":"net_lobby_leave","path":"scripts/net_lobby_leave/net_lobby_leave.yy",},"order":5,},
     {"id":{"name":"net_send_map","path":"scripts/net_send_map/net_send_map.yy",},"order":9,},
+    {"id":{"name":"snd_spacewar_player_explosion","path":"sounds/snd_spacewar_player_explosion/snd_spacewar_player_explosion.yy",},"order":5,},
     {"id":{"name":"net_lobby_join_auto","path":"scripts/net_lobby_join_auto/net_lobby_join_auto.yy",},"order":4,},
     {"id":{"name":"scr_tris_create_grid","path":"scripts/scr_tris_create_grid/scr_tris_create_grid.yy",},"order":0,},
     {"id":{"name":"scr_tris_check_finish","path":"scripts/scr_tris_check_finish/scr_tris_check_finish.yy",},"order":1,},
