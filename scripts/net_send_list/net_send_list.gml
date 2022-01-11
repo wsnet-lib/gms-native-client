@@ -17,11 +17,11 @@ function net_send_list(msgId, player, payload, reliable=0) {
 	buffer_write(buf, buffer_u8, net_cmd.game_message);
 	buffer_write(buf, buffer_u8, player);
 	buffer_write(buf, buffer_u16, msgId);
-	buffer_write(buf, buffer_u8, net_type.array);
+	buffer_write(buf, buffer_u8, net_type.list);
 	
 	buffer_write(buf, buffer_u16, len);
 	for (var i = 0; i<len; i++) {
-		__net_buffer_append_mixed_value(buffer, payload[| i]);
+		__net_buffer_append_mixed_value(buf, payload[| i]);
 	}
 	
 	buffer_resize(buf, buffer_tell(buf) + NET_HEADER_SIZE);

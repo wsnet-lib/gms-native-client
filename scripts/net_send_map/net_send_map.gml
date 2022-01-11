@@ -17,7 +17,7 @@ function net_send_map(msgId, player, payload, reliable=0) {
 	buffer_write(buf, buffer_u8, net_cmd.game_message);
 	buffer_write(buf, buffer_u8, player);
 	buffer_write(buf, buffer_u16, msgId);
-	buffer_write(buf, buffer_u8, net_type.array);
+	buffer_write(buf, buffer_u8, net_type.map);
 	
 	buffer_write(buf, buffer_u16, len);
 	var key = ds_map_find_first(payload);	

@@ -161,6 +161,7 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 			};
 	    array_push(global.net_players, player);
 			global.net_players_map[$ player.id] = player;
+			global.net_players_count++;
 			events[net_evt.player_join](true, player);
 	  break;
 				
@@ -176,6 +177,7 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	  break;
 				
 		case net_cmd.lobby_player_left:
+			global.net_players_count = max(0, global.net_players_count-1);
 	    var player_left_id = buffer_read(buffer, buffer_u8);
 			var current_admin_id = global.net_admin_id;
 	    global.net_admin_id = buffer_read(buffer, buffer_u8);

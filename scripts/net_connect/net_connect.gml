@@ -107,38 +107,39 @@ enum net_error {
  * @param {String} [layer] The layer which the net manager instance will be created
  */
 function net_connect(address, port, on_connect = undefined, socket_type = network_socket_udp, layer = "Instances") {
+	if (variable_global_exists("net_connected") && global.net_connected) return;
+	
+	// Global variables
+	global.net_connected = true;
+	global.net_enable_logs = false; // Globally enable the generic logs
+	global.net_enable_trace_logs = false; // Enable additional logs for minor things like pings and acks
+	global.net_lobby_id = undefined;
+	global.net_players_count = 0;
+	global.net_player_id = undefined;
+	global.net_player_name = undefined;		
+	global.net_admin_id = undefined;
+	global.net_players = [];
+	global.net_players_map = {};
+	global.net_lobbies = [];
+	global.net_error_id = undefined;
+	global.net_ping_ms = 0; // Ping in ms
+	
 	instance_create_layer(0, 0, layer, __obj_net_manager);
 	
 	with (__obj_net_manager) {
-		global.net_connected = true;
 		server_uuid = undefined;
-		global.net_enable_logs = false; // Globally enable the generic logs
-		global.net_enable_trace_logs = false; // Enable additional logs for minor things like pings and acks
 		packet_id = 0; // Packet ID sequence
 		last_server_pong = get_timer();
 		ping_timer = last_server_pong; // Internal usage. Used to precisely calculate the ping
-		global.net_ping_ms = 0; // Ping in ms
-		
 		rpackets = {}; // Map of reliable messages
 		socket = network_create_socket(socket_type); // Socket
 		events = array_create(net_evt.events_count, function() {}); // Events callbacks
-		global.net_error_id = undefined;
 		game_message_callbacks = {}; // Game messages callbacks
 		
 		// Connection callback
 		if (on_connect != undefined && on_connect != noone) {
 			events[net_evt.connection] = on_connect;	
 		}
-		
-		// Lobby state
-		global.net_lobby_id = undefined;
-		global.net_players_count = 0;
-		global.net_player_id = undefined;
-		global.net_player_name = undefined;		
-		global.net_admin_id = undefined;
-		global.net_players = [];
-		global.net_players_map = {};
-		global.net_lobbies = [];
 	
 		// Command names struct (for debugging only)
 		commands = {};
