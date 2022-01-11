@@ -1,7 +1,5 @@
 // Broadcast the player position
 with (obj_spacewar_player) {
-	if (!transformChanged) continue;
-	transformChanged = false;
 	net_send_array(spacewar_msg.player_pos, all, [x, y, speed, direction]);	
 }
 

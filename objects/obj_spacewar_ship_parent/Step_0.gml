@@ -14,8 +14,8 @@ if (hit_animation) {
 
 if (hp <= 0 && !audio_is_playing(snd_spacewar_player_explosion)) {
 	audio_play_sound(snd_spacewar_player_explosion, 1, false);
-	instance_destroy();
 	effect_create_above(ef_explosion, x, y, 0, c_red);
+	instance_destroy();
 	
 	if (playerId == global.net_player_id) {
 		game_restart();
