@@ -2,20 +2,20 @@
   "bboxMode": 0,
   "collisionKind": 1,
   "type": 0,
-  "origin": 9,
+  "origin": 4,
   "preMultiplyAlpha": false,
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
   "bbox_left": 0,
-  "bbox_right": 248,
+  "bbox_right": 24,
   "bbox_top": 0,
-  "bbox_bottom": 143,
+  "bbox_bottom": 23,
   "HTile": false,
   "VTile": false,
   "For3D": false,
-  "width": 249,
-  "height": 144,
+  "width": 25,
+  "height": 24,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
@@ -24,9 +24,18 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"6d750692-591e-4cce-a491-6f99eb526d9b","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"6d750692-591e-4cce-a491-6f99eb526d9b","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":{"name":"8f21f7b5-63cb-4048-9b02-a3268ccf07e7","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_spacewar_shot","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"6d750692-591e-4cce-a491-6f99eb526d9b","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"c444656d-64cf-4fe9-b429-444ac2de2d0b","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"c444656d-64cf-4fe9-b429-444ac2de2d0b","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":{"name":"ed3cc36e-b2b7-4235-bba0-22a0dad4a44a","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_spacewar_shot","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"c444656d-64cf-4fe9-b429-444ac2de2d0b","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"ede743b7-16e0-45df-b822-ad062b0f5e8d","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"ede743b7-16e0-45df-b822-ad062b0f5e8d","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":{"name":"ed3cc36e-b2b7-4235-bba0-22a0dad4a44a","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_spacewar_shot","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"ede743b7-16e0-45df-b822-ad062b0f5e8d","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"9a9f9848-9cb9-430c-b6ee-af5f55f7981e","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"9a9f9848-9cb9-430c-b6ee-af5f55f7981e","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":{"name":"ed3cc36e-b2b7-4235-bba0-22a0dad4a44a","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_spacewar_shot","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"9a9f9848-9cb9-430c-b6ee-af5f55f7981e","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"b2b9a8c9-68a9-4859-8fd1-51844deffbce","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"b2b9a8c9-68a9-4859-8fd1-51844deffbce","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"LayerId":{"name":"ed3cc36e-b2b7-4235-bba0-22a0dad4a44a","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_spacewar_shot","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","name":"b2b9a8c9-68a9-4859-8fd1-51844deffbce","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
     "spriteId": {"name":"spr_spacewar_shot","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},
@@ -36,12 +45,15 @@
     "playbackSpeedType": 0,
     "autoRecord": true,
     "volume": 1.0,
-    "length": 1.0,
+    "length": 4.0,
     "events": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MessageEventKeyframe>",},
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"3aed974b-332a-4f70-b44a-61e3deb0ef10","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"6d750692-591e-4cce-a491-6f99eb526d9b","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"e013b148-8e9e-46e8-9f4e-4455a2fa7d77","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"c444656d-64cf-4fe9-b429-444ac2de2d0b","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"f0699254-04c8-4370-a346-21fec1c206f1","Key":1.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"ede743b7-16e0-45df-b822-ad062b0f5e8d","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"86ed572c-5ce6-4566-a7fa-972768b5c6af","Key":2.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"9a9f9848-9cb9-430c-b6ee-af5f55f7981e","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"ab9fd1c4-50d5-4a9a-9df0-8067d9e0a161","Key":3.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"b2b9a8c9-68a9-4859-8fd1-51844deffbce","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -54,8 +66,8 @@
     "backdropHeight": 768,
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
-    "xorigin": 30,
-    "yorigin": 72,
+    "xorigin": 12,
+    "yorigin": 12,
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_spacewar_shot","path":"sprites/spr_spacewar_shot/spr_spacewar_shot.yy",},
@@ -65,7 +77,7 @@
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"8f21f7b5-63cb-4048-9b02-a3268ccf07e7","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"ed3cc36e-b2b7-4235-bba0-22a0dad4a44a","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {

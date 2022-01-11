@@ -1,5 +1,7 @@
 if (!firstUpdateReceived) exit;
 
+event_inherited();
+
 // Lerp the enemy position to the actual current position. The lerp is used to reduce lag effects
 speed = speedTarget;
 direction = lerp_angle(direction, directionTarget, 5); 

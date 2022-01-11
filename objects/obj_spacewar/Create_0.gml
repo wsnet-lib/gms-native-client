@@ -1,12 +1,17 @@
 window_set_size(960, 540);
 alarm[0] = 1; // Center the window position
 randomize();
+audio_play_sound(snd_spacewar_bg, 0, true);
 tickrate = room_speed / 30; // Server updates tickrate
 is_admin = undefined; // If the current player is an admin
+played_audio_shots = []; // Currently played audio shots
+alarm[2] = 1; // Start the shots audio check manager
 
 // Networking messages types
 enum spacewar_msg {
 	player_pos, // Update a player position
+	player_state, // Set the players state,
+	shot // Shot
 }
 
 // Quit the game on a server generic error or if the server has reconnected (pratically if the previous lobby is lost)
@@ -15,14 +20,32 @@ net_event(net_evt.lobby_data, function(success, has_reconnected) {
 	if (has_reconnected) game_end();
 });
 
+/** Create the players (self and the enemies) */
 function createPlayers() {
 	var player = instance_create_layer(-999, -999, "Instances", obj_spacewar_player);
-	player.playerId = global.net_player_id;
+	player.playerId = global.net_player_id;	
+	player.image_index = irandom(sprite_get_number(spr_spacewar_player));
 	
+	var playerMap = global.net_players_map[$ player.playerId];
+	playerMap.obj = player;
+	
+	// Broadcast its state
+	var state = {
+		id: player.playerId,
+		index: player.image_index,
+		hp: player.hp,
+		receive_state: true
+	};
+	net_send_struct(spacewar_msg.player_state, all, state, true);
+	
+	// Create the other enemies and ask their state
 	for (var i=0, len=array_length(global.net_players); i<len; i++) {
 		var netEnemy = global.net_players[i];
 		var enemy = instance_create_layer(-999, -999, "Instances", obj_spacewar_enemy);
 		enemy.playerId = netEnemy.id;
+		
+		var enemyMap = global.net_players_map[$ netEnemy.id];
+		enemyMap.obj = enemy;
 	}
 	
 	alarm[1] = 1; // Start the players state updates
@@ -45,9 +68,13 @@ net_event(net_evt.lobby_create, function(success) {
 });
 
 // When a new player joins, add it as enemy
-net_event(net_evt.player_join, function(success, player) {	
+net_event(net_evt.player_join, function(success, player) {
+	// Create the new enemy instance
 	var enemy = instance_create_layer(-999, -999, "Instances", obj_spacewar_enemy);
 	enemy.playerId = player.id;
+	
+	var enemyMap = global.net_players_map[$ player.id];
+	enemyMap.obj = enemy;
 });
 
 // Remove a player from the game
@@ -55,16 +82,14 @@ net_event(net_evt.player_leave, function(success, player) {
 	with (obj_spacewar_enemy) {
 		if (playerId != player.id) continue;
 		instance_destroy();
-		break;
 	}
 });
 
 // Update a player position state
 // If this is the first update, directly set the final variables and not the target variables
 net_on(spacewar_msg.player_pos, function(sender_id, pos) {
-	with (obj_spacewar_enemy) {
-		if (playerId != sender_id) continue;
-		
+	var enemyMap = global.net_players_map[$ sender_id];
+	with (enemyMap.obj) {
 		if (!firstUpdateReceived) {
 			x = pos[0];			
 			y = pos[1];
@@ -82,6 +107,38 @@ net_on(spacewar_msg.player_pos, function(sender_id, pos) {
 			directionTarget = pos[3];
 		}
 		break;
+	}
+});
+
+// Set the players state
+net_on(spacewar_msg.player_state, function(sender_id, state) {
+	var enemyMap = global.net_players_map[$ state.id];
+	with (enemyMap.obj) {
+		image_index = state.index;
+		hp = state.hp;
+	}
+	
+	// Send back my state to the sender
+	if (state.receive_state) {
+		var playerState = {
+			id: obj_spacewar_player.playerId,
+			index: obj_spacewar_player.image_index,
+			hp: obj_spacewar_player.hp,
+			receive_state: false
+		};
+		net_send_struct(spacewar_msg.player_state, sender_id, playerState, true);
+	}
+});
+
+// Create an enemy shot
+net_on(spacewar_msg.shot, function(sender_id, pos) {
+	var enemyMap = global.net_players_map[$ sender_id];
+	with (enemyMap.obj) {
+		shotX = pos[0];
+		shotY = pos[1];
+		shotTargetX = pos[2];
+		shotTargetY = pos[3];
+		scr_spacewar_create_shot();
 	}
 });
 

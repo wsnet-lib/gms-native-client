@@ -8,7 +8,7 @@
  * @param {String} [username] Username of the lobby admin
  * @param {String} [password] Optional lobby password (empty string or undefined = public lobby)
  */
-function net_lobby_create(lobby_name="", max_players=16, username = "", password = "") {
+function net_lobby_create(lobby_name = "", max_players = 12, username = "", password = "") {
 	if (password == undefined) password = "";
 	
 	var buf = buffer_create(5 + string_byte_length(lobby_name) + string_byte_length(username) +

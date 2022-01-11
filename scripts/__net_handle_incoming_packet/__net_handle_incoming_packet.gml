@@ -33,8 +33,10 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 			}
 		
 			var packet = rpackets[$ packet_id];
-			buffer_delete(packet.buffer);
-			variable_struct_remove(rpackets, packet_id);
+			if (packet != undefined) {
+				buffer_delete(packet.buffer);
+				variable_struct_remove(rpackets, packet_id);
+			}
 		break;
 	
 		case net_cmd.game_message:
@@ -57,7 +59,7 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	    global.net_lobby_id = buffer_read(buffer, buffer_u32);
 	    global.net_admin_id = buffer_read(buffer, buffer_u8);
 	    global.net_player_id = buffer_read(buffer, buffer_u8);			
-			global.net_players_count = buffer_read(buffer, buffer_u8);			
+			global.net_players_count = buffer_read(buffer, buffer_u8);
 			
 			for (var i=0; i<global.net_players_count; i++) {
 				var listPlayerId = buffer_read(buffer, buffer_u8);
@@ -161,7 +163,7 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 			};
 	    array_push(global.net_players, player);
 			global.net_players_map[$ player.id] = player;
-			global.net_players_count++;
+			global.net_players_count = array_length(global.net_players);
 			events[net_evt.player_join](true, player);
 	  break;
 				
@@ -177,7 +179,6 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 	  break;
 				
 		case net_cmd.lobby_player_left:
-			global.net_players_count = max(0, global.net_players_count-1);
 	    var player_left_id = buffer_read(buffer, buffer_u8);
 			var current_admin_id = global.net_admin_id;
 	    global.net_admin_id = buffer_read(buffer, buffer_u8);
@@ -188,6 +189,7 @@ function __net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size) {
 			}
 	            
 			var left_player = __net_remove_player(player_left_id);
+			global.net_players_count = array_length(global.net_players);
 			if (left_player != undefined) {
 	      events[net_evt.player_leave](true, left_player);
 	    }
