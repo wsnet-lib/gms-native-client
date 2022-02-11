@@ -2,6 +2,7 @@ switch (async_load[? "type"]) {
 	case network_type_data:
 		// Decode the buffer
 		var buffer = async_load[? "buffer"];
+		if (!buffer_exists(buffer)) exit;
 		var buffer_size = buffer_get_size(buffer);
 		var cmd_id = buffer_read(buffer, buffer_u8);
 		var packet_id = buffer_peek(buffer, buffer_size - 5, buffer_u32);
@@ -25,7 +26,7 @@ switch (async_load[? "type"]) {
 		}
 
 		// Handle the packet
-		__net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size);		
+		__net_handle_incoming_packet(cmd_id, packet_id, buffer, buffer_size);
 	break;
 	
 	// For TCP/WS protocols

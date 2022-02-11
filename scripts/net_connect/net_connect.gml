@@ -124,6 +124,21 @@ function net_connect(address, port, on_connect = undefined, socket_type = networ
 	global.net_error_id = undefined;
 	global.net_ping_ms = 0; // Ping in ms
 	
+	/** Network emulation for testing purposes */
+	
+	// Packet loss: When greater than 0, will drop random packets (in percentage)
+	// Example: global.net_test_packet_loss_min = 45; global.net_test_packet_loss_max = 55
+	// Actual packet loss: 45-55%
+	global.net_test_packet_loss_min = 0;
+	global.net_test_packet_loss_max = 0;
+	
+	// Packet delay: When greater than 0, will delay the outgoing packets (in steps, 1 step = 16.66ms)
+	// Example: global.net_test_packet_delay_min = 1; global.net_test_packet_delay_max = 4
+	// Actual packet delay: 1-4 steps = ~16-64ms
+	global.net_test_packet_delay_min = 0; 
+	global.net_test_packet_delay_max = 0;
+	
+	/** Create the manager instance */
 	instance_create_layer(0, 0, layer, __obj_net_manager);
 	
 	with (__obj_net_manager) {
@@ -135,6 +150,7 @@ function net_connect(address, port, on_connect = undefined, socket_type = networ
 		socket = network_create_socket(socket_type); // Socket
 		events = array_create(net_evt.events_count, function() {}); // Events callbacks
 		game_message_callbacks = {}; // Game messages callbacks
+		delayed_packets = {}; // Map of delayed packets (for network emulation purposes)
 		
 		// Connection callback
 		if (on_connect != undefined && on_connect != noone) {

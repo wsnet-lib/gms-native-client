@@ -21,7 +21,29 @@ function __net_send(buffer, reliable=0) {
 		}
 	
 		var size = buffer_get_size(buffer);
-		network_send_raw(socket, buffer, size);
+		
+		// The condition will emulate a network with a packet loss
+		var can_send_packet = (!global.net_test_packet_loss_min && !global.net_test_packet_loss_max) ||
+			irandom(100) > irandom_range(global.net_test_packet_loss_min, global.net_test_packet_loss_max);
+		
+		var immediate_packet = !global.net_test_packet_delay_min && !global.net_test_packet_delay_max;
+			
+		if (can_send_packet) {
+			// Send the packet
+			if (immediate_packet) {
+				network_send_raw(socket, buffer, size);
+			} else {
+				// Schedule the packet for a delayed sending (for network emulation purposes)	
+				variable_struct_set(delayed_packets, current_packet_id, { 
+					buffer: buffer, 
+					size: size, 
+					delay: irandom_range(global.net_test_packet_delay_min, global.net_test_packet_delay_max),
+					send: true
+				});
+			}
+		} else {
+			__net_log("⚠ NETWORK EMULATION: Packet " + string(current_packet_id) + " has been dropped");
+		}
 	
 		if (reliable) {
 			variable_struct_set(rpackets, current_packet_id, {
@@ -29,7 +51,7 @@ function __net_send(buffer, reliable=0) {
 				buffer_size: size,
 				tempt: 0
 			});
-		} else {
+		} else if (can_send_packet && immediate_packet) {
 			buffer_delete(buffer);
 		}
 	}
