@@ -41,7 +41,7 @@ function __net_send(buffer, reliable=0) {
 					send: true
 				});
 			}
-		} else {
+		} else if (global.net_enable_logs && global.net_enable_trace_logs) {
 			__net_log("⚠ NETWORK EMULATION: Packet " + string(current_packet_id) + " has been dropped");
 		}
 	

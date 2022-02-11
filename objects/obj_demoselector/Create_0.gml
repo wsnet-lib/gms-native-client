@@ -5,7 +5,6 @@ brk = chr(13) + chr(10);
 
 /** Server connection */
 net_connect("localhost", 8080);
-//net_connect("udp-test-1.fly.dev", 8080);
 global.net_enable_logs = true;
 global.net_enable_trace_logs = true;
 
