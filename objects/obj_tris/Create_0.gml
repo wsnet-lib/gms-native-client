@@ -18,12 +18,6 @@ enum tris_msg {
 	finish, // The game is over
 }
 
-// Quit the game on a server generic error or if the server has reconnected (pratically if the previous lobby is lost)
-net_event(net_evt.error, game_end);
-net_event(net_evt.lobby_data, function(success, has_reconnected) {
-	if (has_reconnected) game_end();
-});
-
 // If no lobbies are found, just create a lobby, otherwise note who is the opponent player
 net_event(net_evt.lobby_join, function(success)  {
 	if (success) {

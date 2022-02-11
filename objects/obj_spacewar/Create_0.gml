@@ -1,9 +1,9 @@
 window_set_size(960, 540);
 alarm[0] = 1; // Center the window position
 randomize();
-audio_play_sound(snd_spacewar_bg, 10, true);
 tickrate = room_speed / 30; // Server updates tickrate
 is_admin = undefined; // If the current player is an admin
+audio_play_sound(snd_spacewar_bg, 10, true);
 played_audio_shots = []; // Currently played audio shots
 alarm[2] = 1; // Start the shots audio check manager
 
@@ -13,12 +13,6 @@ enum spacewar_msg {
 	player_state, // Set the players state,
 	shot // Shot
 }
-
-// Quit the game on a server generic error or if the server has reconnected (pratically if the previous lobby is lost)
-net_event(net_evt.error, game_end);
-net_event(net_evt.lobby_data, function(success, has_reconnected) {
-	if (has_reconnected) game_end();
-});
 
 /** Create the players (self and the enemies) */
 function createPlayers() {
@@ -55,7 +49,7 @@ function createPlayers() {
 net_event(net_evt.lobby_join, function(success)  {	
 	is_admin = !success;
 	if (!success) {
-		net_lobby_create();
+		net_lobby_create();		
 	} else {
 		// Create the player object (on lobby join)
 		createPlayers();

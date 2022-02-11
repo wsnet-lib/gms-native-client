@@ -24,4 +24,4 @@ if (global.net_enable_logs && num_resent_rpackets) {
 	__net_log("🡆 Resent " + string(num_resent_rpackets) + " out of " + string(packets_count) + " reliable packets");
 }
 
-alarm[2] = NET_TIMER_RESEND_RELIABLE;
+alarm[1] = NET_TIMER_RESEND_RELIABLE;
